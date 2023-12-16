@@ -1,0 +1,26 @@
+version: "3"
+services:
+  webapp1:
+    image: nginx
+    ports:
+      - "8081:80"
+    volumes:
+      - ../index/index1.html:/usr/share/nginx/html/index.html
+    networks:
+      my-network:
+        ipv4_address: 192.168.1.4
+  webapp2:
+    image: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ../index/index2.html:/usr/share/nginx/html/index.html
+    networks:
+      my-network:
+        ipv4_address: 192.168.1.5
+networks:
+  my-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
